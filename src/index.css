@@ -1,0 +1,274 @@
+@import "tailwindcss";
+@import "@fontsource-variable/archivo/wdth.css";
+@import "@fontsource/commit-mono/latin-400.css";
+@import "@fontsource/commit-mono/latin-500.css";
+
+@theme {
+  --color-bg: #e8eaed;
+  --color-panel: #f5f6f7;
+  --color-panel-2: #dde0e4;
+  --color-ink: #161a1f;
+  --color-muted: #5f666e;
+  --color-muted-2: #4e555d;
+  --color-accent: #c8401f;
+  --color-accent-deep: #b23617;
+  --color-on-accent: #fff7f4;
+  --color-accent-tint: #f6e3dd;
+  --color-hairline: rgba(22, 26, 31, 0.16);
+  --color-hairline-soft: rgba(22, 26, 31, 0.09);
+
+  --font-sans: "Archivo Variable", Archivo, system-ui, -apple-system, sans-serif;
+  --font-mono: "Commit Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --radius-panel: 8px;
+  --radius-core: 6px;
+
+  --shadow-panel: 0 1px 0 rgba(22, 26, 31, 0.06), 0 12px 32px rgba(40, 48, 60, 0.1);
+  --shadow-lift: 0 1px 0 rgba(22, 26, 31, 0.06), 0 3px 10px rgba(40, 48, 60, 0.08);
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+  html {
+    background: var(--color-bg);
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+  body {
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-variation-settings: "wdth" 100;
+  }
+  ::selection {
+    background: var(--color-accent-tint);
+    color: var(--color-ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  img,
+  svg {
+    display: block;
+  }
+  button {
+    font: inherit;
+    color: inherit;
+  }
+}
+
+@layer components {
+  .display {
+    font-weight: 500;
+    font-variation-settings: "wdth" 92;
+    letter-spacing: -0.022em;
+    line-height: 1.02;
+    text-wrap: balance;
+  }
+  .display-2 {
+    font-weight: 500;
+    font-variation-settings: "wdth" 96;
+    letter-spacing: -0.016em;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+  .display-3 {
+    font-weight: 500;
+    font-variation-settings: "wdth" 98;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-muted-2);
+  }
+  .plate {
+    background: var(--color-panel);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-panel);
+    box-shadow: var(--shadow-panel);
+  }
+  .plate-flat {
+    background: var(--color-panel);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-panel);
+    box-shadow: var(--shadow-lift);
+  }
+  .readout {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -6rem;
+    z-index: 100;
+    padding: 0.75rem 1rem;
+    background: var(--color-ink);
+    color: var(--color-panel);
+    border-radius: var(--radius-panel);
+    font-weight: 500;
+    transition: top 0.15s ease;
+  }
+  .skip-link:focus {
+    top: 1rem;
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    padding: 0 1.125rem;
+    border-radius: var(--radius-panel);
+    font-weight: 500;
+    font-size: 0.9375rem;
+    line-height: 1;
+    white-space: nowrap;
+    text-decoration: none;
+    cursor: pointer;
+    user-select: none;
+    border: 0;
+    transition:
+      background-color 0.15s ease,
+      color 0.15s ease,
+      box-shadow 0.15s ease,
+      transform 0.12s ease;
+  }
+  .btn:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+  .btn:focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+  .btn-primary {
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+  .btn-primary:hover:not(:disabled) {
+    background: var(--color-accent-deep);
+  }
+  .btn-outline {
+    background: transparent;
+    color: var(--color-ink);
+    box-shadow: inset 0 0 0 1px rgba(22, 26, 31, 0.6);
+  }
+  .btn-outline:hover:not(:disabled) {
+    background: var(--color-panel);
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--color-ink);
+    box-shadow: inset 0 0 0 1px var(--color-hairline);
+  }
+  .btn-ghost:hover:not(:disabled) {
+    background: var(--color-panel-2);
+  }
+  .btn-running {
+    background: var(--color-accent-tint);
+    color: var(--color-accent-deep);
+    box-shadow: inset 0 0 0 1px var(--color-accent);
+  }
+  .btn-done {
+    background: var(--color-panel-2);
+    color: var(--color-muted-2);
+    box-shadow: inset 0 0 0 1px var(--color-hairline);
+  }
+  .btn:disabled {
+    cursor: not-allowed;
+  }
+  .btn-outline:disabled,
+  .btn-ghost:disabled,
+  .btn-primary:disabled {
+    opacity: 0.45;
+  }
+  .btn-sm {
+    min-height: 40px;
+    padding: 0 0.9375rem;
+    font-size: 0.875rem;
+  }
+  .btn-icon {
+    width: 44px;
+    padding: 0;
+  }
+  @media (max-width: 767px) {
+    .btn-sm {
+      min-height: 44px;
+    }
+  }
+
+  .navlink {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 0.625rem;
+    border-radius: var(--radius-core);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-muted-2);
+    text-decoration: none;
+    transition: color 0.15s ease, background-color 0.15s ease;
+  }
+  .navlink:hover {
+    color: var(--color-ink);
+    background: var(--color-panel);
+  }
+
+  .hairline-y {
+    border-bottom: 1px solid var(--color-hairline);
+  }
+
+  .cursor-block {
+    display: inline-block;
+    width: 0.5em;
+    height: 1em;
+    vertical-align: -0.15em;
+    margin-left: 0.25em;
+    background: var(--color-accent);
+    animation: blink 1s steps(1) infinite;
+  }
+  @keyframes blink {
+    0%,
+    49% {
+      opacity: 1;
+    }
+    50%,
+    100% {
+      opacity: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cursor-block {
+      animation: none;
+    }
+  }
+
+  .scroll-quiet {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(22, 26, 31, 0.22) transparent;
+  }
+}
