@@ -58,7 +58,7 @@ export function RunConsole() {
       data-completed={completed}
     >
       <div className="flex min-h-[44px] flex-col justify-center gap-0.5 border-b border-hairline px-4 py-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:py-0 sm:px-5">
-        <span className="text-[13px] font-medium">{consoleCopy.title}</span>
+        <h2 className="text-[13px] font-medium">{consoleCopy.title}</h2>
         <span className="font-mono text-[11.5px] leading-tight text-muted-2 sm:text-right">{consoleCopy.simulationLabel}</span>
       </div>
       <div className="flex flex-wrap items-center gap-2 border-b border-hairline px-4 py-3 sm:px-5">
