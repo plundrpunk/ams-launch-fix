@@ -1,5 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <rect width="32" height="32" rx="7" fill="#E8EAED"/>
-  <polygon points="16,4 26.4,10 26.4,22 16,28 5.6,22 5.6,10" stroke="#161A1F" stroke-width="2" stroke-linejoin="round"/>
-  <rect x="15" y="2" width="2" height="6.5" fill="#C8401F"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="122 54 1000 1000" fill="#000" role="img" aria-label="Automaton"><style>@media(prefers-color-scheme:dark){svg{fill:#fff}}</style><path d="M626.5 200.5 700 322 418 783.5H449L523 669 533 660 700 658 706 662 530 909H202Z M717 350.5 1043 909H877.5L638 477.5Z"/></svg>

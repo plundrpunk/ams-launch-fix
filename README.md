@@ -12,7 +12,7 @@ Fonts, self-hosted through fontsource and imported in `src/index.css`:
 
 Palette (tokens in `@theme`, `src/index.css`): background `#E8EAED`, panel `#F5F6F7`, panel-2 `#DDE0E4`, hairline `rgba(22,26,31,0.16)`, ink `#161A1F`, muted `#5F666E`, muted-2 `#4E555D` (used where muted would fall under 4.5:1, e.g. on panel-2), accent vermilion `#C8401F` with hover `#B23617`, text on accent `#FFF7F4`, accent tint `#F6E3DD` (running-button state, text selection). Radius 8px for panels and buttons, 6px for inner cores. Shadows `0 1px 0 rgba(22,26,31,0.06), 0 12px 32px rgba(40,48,60,0.10)`. Theme locked light (`color-scheme: light`).
 
-Vermilion appears only as: buttons (primary CTAs, next run step), the running-state outline, the active transcript line marker and block cursor, the Track fix marks, the tab index mark, the favicon and logo index tick.
+Vermilion appears only as: buttons (primary CTAs, next run step), the running-state outline, the active transcript line marker and block cursor, the Track fix marks, the tab index mark, the console index marks. The Automaton logo inherits the surrounding ink color; the favicon adapts to browser theme.
 
 ## Layout
 
@@ -32,7 +32,7 @@ Sections (8) and layout families:
 
 Eyebrow count: 1 ("Pricing", section 7). The QA harness heuristic finds exactly one.
 
-Nav: 64px, single line at desktop, hexagon outline plus "Automaton Memory System" in Archivo 600, links Console, Memory, Evidence, Pricing and a vermilion "Start free"; collapses to a 44px menu button under 768px (Escape closes, resize past 768 closes). Skip link, one `<h1>`, alt text on both images, `rel="noopener noreferrer"` on external links, `<title>`, meta description, og:title and og:description set in `index.html`. Favicon: `public/favicon.svg` (hexagon outline with a vermilion index mark).
+Nav: 64px, single line at desktop, approved Automaton mark plus "Automaton Memory System" in Archivo 600, links Console, Memory, Evidence, Pricing and a vermilion "Start free"; collapses to a 44px menu button under 768px (Escape closes, resize past 768 closes). Skip link, one `<h1>`, alt text on both images, `rel="noopener noreferrer"` on external links, `<title>`, meta description, og:title and og:description set in `index.html`. Favicon: `public/favicon.svg` (approved adaptive Automaton mark).
 
 ## Run Console
 
@@ -49,7 +49,7 @@ Nav: 64px, single line at desktop, hexagon outline plus "Automaton Memory System
 
 - `public/img/smart-actions-scoreboard.webp`: real dashboard screenshot converted with `_tools/img.mjs` to 1600 wide (40 KB). Caption: "Dashboard snapshot from April 2026."
 - `public/img/fix-dial.webp`: from `_assets/gen/fix-dial-a.png` (source is 1200x896, so the WebP is 1200 wide, 42 KB), shown in a 4:3 box with `object-cover`; hidden via `onError` if missing. Referenced by URL through `import.meta.env.BASE_URL`.
-- Logo: the monochrome derivation of `ams_logo5.svg` (gradients and hex fills to currentColor, filters removed) was rendered at 28px and does not read; the inner detail merges into a solid hexagon and the wordmark is illegible (`_evidence/fix/logo-mono-test.png`). Per spec the nav uses a hexagon outline plus the wordmark in Archivo 600.
+- Logo: approved Automaton geometry copied unchanged into `src/brand/automaton.ts`, rendered with `currentColor` by `AutomatonMark` and `Logo` in the nav and footer. Approved favicon, touch icon and social assets live in `public/` and `public/brand/`.
 
 ## Verification
 
@@ -90,3 +90,34 @@ Every string in `src/content.ts` was re-read against DESIGN.md sections 0, 1 and
 
 - `fix-dial.webp` is 1200 wide because the generated source is 1200x896; regenerate at 1600 wide if a larger display is ever needed.
 - If `_tools/qa.mjs` is later run with plain `NODE_PATH`, it will fail on `import "playwright"`; keep using the `--import ./fix/qa/pw-register.mjs` preload or install `playwright` where ESM resolution can find it.
+
+## Automaton logo update, October 21, 2026
+
+The approved Automaton mark replaces the legacy hexagon. The traced geometry and
+finished public assets are copied unchanged from Drew's approved asset folder;
+inline SVGs use `currentColor` to preserve this page's palette. `index.html` adds
+the adaptive SVG/ICO favicon, 180px apple-touch icon, and 1200x630 OG/Twitter
+card with `%BASE_URL%` paths. No dependency or deployment configuration changed.
+
+Verification on this branch:
+
+- `BASE_PATH=/ams-launch-fix/ npm run build`: PASS (`tsc -b && vite build`).
+- Existing `_tools/qa.mjs`, normal and reduced motion: PASS, zero failures in
+  both runs across 320, 390, 768, 1024, 1440 and 1920px. Zero console errors,
+  failed requests, unloaded images or horizontal overflow; 44px mobile targets
+  and hero fit checks pass.
+- Brand checks: 15 PASS, 0 FAIL. Header/footer geometry and `currentColor`
+  verified under light and dark OS preferences; served favicon, ICO, touch icon
+  and social card match the approved files byte-for-byte. Social dimensions
+  verified at 1200x630. Desktop anchor/home navigation and 390px menu/Escape pass.
+- Desktop (1440x900) and mobile (390x844) hero and footer screenshots visually
+  inspected. Full-page captures are also saved.
+- Existing `qa/console.mjs`: 35 PASS, 0 FAIL, including the two-run journey,
+  empty/invalid/blocked storage, reload/reset, keyboard and 20 rapid clicks.
+
+Local evidence (outside this Git repository):
+`../output/playwright/automaton-logo-20261021/fix/` and
+`../output/playwright/automaton-logo-20261021/fix-build.log`.
+Historical `_evidence/` remains untouched. Oversized text entry is not applicable
+to the logo surfaces (no user text input). Public crawler previews and production
+behavior were not tested. This branch is for PR review only; no merge or deploy.
